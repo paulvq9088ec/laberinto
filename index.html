@@ -34,7 +34,7 @@
                 <span id="control-mode" class="text-blue-600 font-bold">Cargando...</span>
             </div>
             <!-- Botón de Pantalla Completa Neumórfico -->
-            <button id="fullscreen-toggle-btn" onclick="toggleFullscreen()" class="px-3 py-1.5 rounded-xl neuo-btn text-[10px] md:text-xs font-bold text-white flex items-center gap-1.5 cursor-pointer">
+            <button id="fullscreen-toggle-btn" onclick="toggleFullscreen()" class="bg-green-600 px-3 py-1.5 rounded-xl neuo-btn text-[10px] md:text-xs font-bold text-white flex items-center gap-1.5 cursor-pointer">
                 <span id="fullscreen-icon">📺</span> <span id="fullscreen-text">Pantalla Completa</span>
             </button>
         </div>
@@ -94,7 +94,7 @@
 
         <!-- MODAL DE FEEDBACK (ÉXITO / FALLO) -->
         <div id="feedback-modal" class="hidden bg-[#eef2f7] rounded-3xl p-4 md:p-8 max-w-lg w-[95%] sm:w-full text-center neuo-flat z-50 flex flex-col gap-3 md:gap-6 border border-white/60 max-h-[94vh] overflow-y-auto">
-            <div id="fb-icon-container" class="game-modal-inner w-12 h-12 md:w-20 md:h-20 mx-auto rounded-full flex items-center justify-center text-2xl md:text-4xl shadow-md shrink-0">
+            <div id="fb-icon-container" class="game-modal-inner w-10 h-10 md:w-20 md:h-20 mx-auto rounded-full flex items-center justify-center text-2xl md:text-4xl shadow-md shrink-0">
                 🎉
             </div>
             <div class="game-modal-inner">
@@ -114,18 +114,18 @@
             <div class="game-modal-inner">
                 <h1 id="end-title" class="text-lg md:text-3xl font-black text-slate-800">¡Reto Completado con Éxito!</h1>
                 <p id="end-score" class="text-blue-600 font-bold text-xs md:text-xl mt-0.5">Tu puntuación: 100% de aciertos</p>
-                <div class="mt-1.5 md:mt-4 p-2 md:p-4 bg-white/60 border border-slate-200/50 rounded-xl text-left text-[11px] md:text-sm text-slate-600 leading-relaxed gap-1 md:gap-2 flex flex-col">
+                
+                <div class="mt-1.5 md:mt-4 p-2 md:p-4 bg-white/60 border border-slate-200/50 rounded-xl text-left text-[11px] md:text-sm text-slate-600 leading-relaxed gap-2 flex flex-col">
                     <p id="end-desc-1"></p>
-                    <p id="end-desc-2" class="font-semibold text-slate-700"></p>
+                    <p id="end-desc-2" class="font-semibold text-slate-700">Ya puedes continuar con la siguiente lección teórica o volver a intentar el desafío aquí abajo.</p>
                 </div>
             </div>
-            <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full shrink-0">
-                <button id="end-reset-btn" onclick="restartGame()" class="flex-1 py-2.5 md:py-3 bg-slate-200 text-slate-700 text-xs md:text-sm font-bold rounded-2xl hover:bg-slate-300 transition-all cursor-pointer">
-                    Reiniciar Desafío
-                </button>
-                <button onclick="finishActivity()" class="flex-1 py-2.5 md:py-3 bg-green-600 text-white text-xs md:text-sm font-bold rounded-2xl hover:bg-green-700 shadow-md shadow-green-600/20 transition-all cursor-pointer">
+            
+            <div class="game-modal-inner flex flex-col gap-2 w-full shrink-0">
+                <button id="end-finish-btn" onclick="finishActivity()" class="w-full py-2.5 md:py-3 bg-green-600 text-white text-xs md:text-sm font-bold rounded-xl hover:bg-green-700 shadow-md shadow-green-600/20 transition-all cursor-pointer">
                     Terminar Actividad
                 </button>
+
             </div>
         </div>
 

@@ -712,29 +712,33 @@ const QUESTIONS_DB = [
     }
 
     function restartGame() {
-        document.getElementById('end-modal').classList.add('hidden');
-        document.getElementById('modal-overlay').classList.add('hidden');
-        game.correctAnswers = 0;
-        game.disabledHoles = [];
-        game.updateScoreUI();
-        game.loadLevel();
-        game.isModalOpen = false;
+        // Al recargar la página, el navegador limpia todo el estado de JavaScript 
+        // y restaura el HTML original a la perfección, evitando cualquier error.
+        window.location.reload();
     }
 
     function finishActivity() {
         markActivityAsCompleted();
         
         const endModal = document.getElementById('end-modal');
-        endModal.innerHTML = `
-            <div class="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-3xl shadow-sm">
-                👍
-            </div>
-            <div>
-                <h3 class="text-lg font-bold text-slate-800">¡Tu progreso ha sido guardado!</h3>
-                <p class="text-slate-500 text-xs mt-1">Ya puedes continuar con la siguiente lección teórica.</p>
-            </div>
-        `;
+        if (endModal) {
+            endModal.innerHTML = `
+                <div class="flex flex-col gap-4 w-full items-center text-center">
+                    <div class="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-3xl shadow-sm">
+                        👍
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">¡Tu progreso ha sido guardado!</h3>
+                        <p class="text-slate-500 text-xs mt-1">Ya puedes continuar con la siguiente lección teórica.</p>
+                    </div>
+                    <button id="end-reset-btn" onclick="restartGame()" class="w-full py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs md:text-sm font-bold rounded-xl transition-all cursor-pointer text-center mt-2">
+                        🔄 Volver a jugar el desafío
+                    </button>
+                </div>
+            `;
+        }
     }
+
 
     function markActivityAsCompleted() {
         if (window.SCORMPlayer) {

@@ -20,7 +20,6 @@ body {
 }
 
 .neuo-btn {
-    background: #1085f3;
     box-shadow: 4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff;
     transition: all 0.2s ease-in-out;
 }
@@ -31,7 +30,7 @@ body {
 }
 
 .neuo-btn:active {
-    box-shadow: inset 3px 3px 6px #d1d9e6, inset -3px -3px 6px #ffffff;
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.15), inset -3px -3px 6px rgba(255, 255, 255, 0.2);
     transform: translateY(2px);
 }
 
@@ -221,5 +220,13 @@ body {
     border-radius: 0.75rem !important;
   }
 
+}
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
 }
