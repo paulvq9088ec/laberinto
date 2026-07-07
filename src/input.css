@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght=300;400;600;700&display=swap');
+        
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #eef2f7;
+    touch-action: none; /* Previene scroll no deseado en móviles */
+}
+
+/* Estilos Neumórficos Personalizados */
+.neuo-flat {
+    background: #eef2f7;
+    box-shadow: 6px 6px 12px #d1d9e6, -6px -6px 12px #ffffff;
+}
+
+.neuo-concave {
+    background: #eef2f7;
+    box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
+}
+
+.neuo-btn {
+    background: #eef2f7;
+    box-shadow: 4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.neuo-btn:hover {
+    box-shadow: 2px 2px 4px #d1d9e6, -2px -2px 4px #ffffff;
+    transform: translateY(1px);
+}
+
+.neuo-btn:active {
+    box-shadow: inset 3px 3px 6px #d1d9e6, inset -3px -3px 6px #ffffff;
+    transform: translateY(2px);
+}
+
+/* Opciones de respuesta */
+.option-card {
+    background: #eef2f7;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff;
+    transition: all 0.2s ease;
+}
+
+.option-card:hover {
+    box-shadow: inset 2px 2px 5px #d1d9e6, inset -2px -2px 5px #ffffff;
+    background-color: #f3f7fc;
+}
