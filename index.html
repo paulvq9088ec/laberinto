@@ -34,7 +34,7 @@
                 <span id="control-mode" class="text-blue-600 font-bold">Cargando...</span>
             </div>
             <!-- Botón de Pantalla Completa Neumórfico -->
-            <button id="fullscreen-toggle-btn" onclick="toggleFullscreen()" class="px-3 py-1.5 rounded-xl neuo-btn text-[10px] md:text-xs font-bold text-slate-700 flex items-center gap-1.5 cursor-pointer">
+            <button id="fullscreen-toggle-btn" onclick="toggleFullscreen()" class="px-3 py-1.5 rounded-xl neuo-btn text-[10px] md:text-xs font-bold text-white flex items-center gap-1.5 cursor-pointer">
                 <span id="fullscreen-icon">📺</span> <span id="fullscreen-text">Pantalla Completa</span>
             </button>
         </div>
@@ -78,43 +78,43 @@
         </div>
 
         <!-- MODAL DE PREGUNTAS -->
-        <div id="question-modal" class="hidden bg-[#eef2f7] rounded-3xl p-5 md:p-8 max-w-2xl w-full text-left neuo-flat z-50 flex flex-col gap-4 md:gap-5 border border-white/60 max-h-[85vh] overflow-y-auto">
+        <div id="question-modal" class="hidden bg-[#eef2f7] rounded-3xl p-4 md:p-8 max-w-2xl w-[95%] sm:w-full text-left neuo-flat z-50 flex flex-col gap-3 md:gap-5 border border-white/60 max-h-[94vh] overflow-y-auto">
             <div class="flex items-center gap-3 shrink-0">
-                <span class="px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-full border border-amber-200">DESAFÍO COMERCIAL</span>
+                <span class="px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-full border border-amber-200">DESAFÍO</span>
                 <span id="question-id-badge" class="text-slate-400 text-xs font-bold">1 de 3</span>
             </div>
-            <div>
+            <div class="game-modal-inner">
                 <h4 id="q-header" class="text-xs font-semibold text-slate-500 leading-relaxed mb-1 uppercase tracking-wider">Caso: Don Jorge</h4>
                 <p id="q-text" class="text-sm md:text-lg font-bold text-slate-800 leading-snug">¿Pregunta de Diagnóstico?</p>
             </div>
-            <div id="q-options" class="flex flex-col gap-2 md:gap-3">
+            <div id="q-options" class="game-modal-inner flex flex-col gap-1.5 md:gap-3">
                 <!-- Se generan dinámicamente -->
             </div>
         </div>
 
         <!-- MODAL DE FEEDBACK (ÉXITO / FALLO) -->
-        <div id="feedback-modal" class="hidden bg-[#eef2f7] rounded-3xl p-5 md:p-8 max-w-lg w-full text-center neuo-flat z-50 flex flex-col gap-4 md:gap-6 border border-white/60 max-h-[85vh] overflow-y-auto">
-            <div id="fb-icon-container" class="w-14 h-14 md:w-20 md:h-20 mx-auto rounded-full flex items-center justify-center text-2xl md:text-4xl shadow-md shrink-0">
+        <div id="feedback-modal" class="hidden bg-[#eef2f7] rounded-3xl p-4 md:p-8 max-w-lg w-[95%] sm:w-full text-center neuo-flat z-50 flex flex-col gap-3 md:gap-6 border border-white/60 max-h-[94vh] overflow-y-auto">
+            <div id="fb-icon-container" class="game-modal-inner w-12 h-12 md:w-20 md:h-20 mx-auto rounded-full flex items-center justify-center text-2xl md:text-4xl shadow-md shrink-0">
                 🎉
             </div>
-            <div>
-                <h2 id="fb-title" class="text-lg md:text-2xl font-extrabold text-slate-800">¡Muy Bien!</h2>
-                <p id="fb-text" class="text-slate-600 text-xs md:text-base mt-1 md:mt-2 leading-relaxed">Mensaje de retroalimentación...</p>
+            <div class="game-modal-inner">
+                <h2 id="fb-title" class="text-base md:text-2xl font-extrabold text-slate-800">¡Muy Bien!</h2>
+                <p id="fb-text" class="text-slate-600 text-xs md:text-base mt-0.5 md:mt-2 leading-relaxed">Mensaje de retroalimentación...</p>
             </div>
-            <button id="fb-btn" onclick="closeFeedback()" class="w-full py-2.5 md:py-3 bg-slate-800 text-white font-semibold text-xs md:text-base rounded-2xl hover:bg-slate-900 transition-all cursor-pointer shrink-0">
+            <button id="fb-btn" onclick="closeFeedback()" class="game-modal-inner w-full py-2.5 md:py-3 bg-slate-800 text-white font-semibold text-xs md:text-base rounded-2xl hover:bg-slate-900 transition-all cursor-pointer shrink-0">
                 Continuar
             </button>
         </div>
 
         <!-- MODAL FIN DEL JUEGO / FELICITACIONES -->
-        <div id="end-modal" class="hidden bg-[#eef2f7] rounded-3xl p-5 md:p-8 max-w-xl w-full text-center neuo-flat z-50 flex flex-col gap-4 md:gap-6 border border-white/60 max-h-[85vh] overflow-y-auto">
-            <div class="w-16 h-16 md:w-24 md:h-24 mx-auto bg-green-500 rounded-3xl flex items-center justify-center shadow-lg shadow-green-500/20 text-white text-3xl md:text-5xl shrink-0">
+        <div id="end-modal" class="hidden bg-[#eef2f7] rounded-3xl p-4 md:p-8 w-[95%] sm:w-full max-w-xl text-center neuo-flat z-50 flex flex-col gap-3 md:gap-6 border border-white/60 max-h-[94vh] overflow-y-auto">
+            <div class="game-modal-inner w-14 h-14 md:w-24 md:h-24 mx-auto bg-green-500 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/20 text-white text-2xl md:text-5xl shrink-0">
                 🏆
             </div>
-            <div>
-                <h1 id="end-title" class="text-xl md:text-3xl font-black text-slate-800">¡Reto Completado con Éxito!</h1>
-                <p id="end-score" class="text-blue-600 font-bold text-sm md:text-xl mt-1">Tu puntuación: 100% de aciertos</p>
-                <div class="mt-2 md:mt-4 p-3 md:p-4 bg-white/60 border border-slate-200/50 rounded-2xl text-left text-xs md:text-sm text-slate-600 leading-relaxed gap-2 flex flex-col">
+            <div class="game-modal-inner">
+                <h1 id="end-title" class="text-lg md:text-3xl font-black text-slate-800">¡Reto Completado con Éxito!</h1>
+                <p id="end-score" class="text-blue-600 font-bold text-xs md:text-xl mt-0.5">Tu puntuación: 100% de aciertos</p>
+                <div class="mt-1.5 md:mt-4 p-2 md:p-4 bg-white/60 border border-slate-200/50 rounded-xl text-left text-[11px] md:text-sm text-slate-600 leading-relaxed gap-1 md:gap-2 flex flex-col">
                     <p id="end-desc-1"></p>
                     <p id="end-desc-2" class="font-semibold text-slate-700"></p>
                 </div>
