@@ -47,3 +47,19 @@ body {
     box-shadow: inset 2px 2px 5px #d1d9e6, inset -2px -2px 5px #ffffff;
     background-color: #f3f7fc;
 }
+
+/* Personalización de barra de scroll interna en modales para mantener la estética */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #eef2f7;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

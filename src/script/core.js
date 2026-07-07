@@ -130,7 +130,6 @@ const QUESTIONS_DB = [
             this.checkOrientation();
             this.detectDeviceMode();
             this.initSensors();
-            this.initTouchControls();
         }
 
         // Detecta si es dispositivo móvil y su orientación para forzar horizontal
@@ -166,20 +165,17 @@ const QUESTIONS_DB = [
             const modeEl = document.getElementById('control-mode');
             const descEl = document.getElementById('start-control-desc');
             const hintEl = document.getElementById('device-hint');
-            const mobileControls = document.getElementById('mobile-controls');
 
             if (isTouch && (isMobile || isLandscape)) {
                 this.controlMode = 'Mobile (Giroscopio)';
                 modeEl.textContent = 'Móvil (Giroscopio)';
-                descEl.innerHTML = 'Inclina tu dispositivo móvil suavemente hacia los lados para mover la bola. También puedes utilizar el <strong>pad virtual</strong> inferior si tu navegador tiene deshabilitados los sensores.';
-                hintEl.textContent = 'Inclina el móvil o usa los botones virtuales para esquivar obstáculos.';
-                mobileControls.classList.remove('hidden');
+                descEl.innerHTML = 'Inclina tu dispositivo móvil suavemente hacia los lados para mover la bola.';
+                hintEl.textContent = 'Inclina el móvil para guiar la esfera y esquivar los obstáculos.';
             } else {
                 this.controlMode = 'Desktop';
                 modeEl.textContent = 'Teclado (Desktop)';
                 descEl.innerHTML = 'Usa las <strong>Flechas del Teclado</strong> para mover la bola sobre el tablero de madera y calcula su inercia.';
                 hintEl.textContent = 'Usa las flechas de dirección de tu teclado para mover la esfera.';
-                // mobileControls.classList.add('hidden');
             }
         }
 
@@ -221,35 +217,13 @@ const QUESTIONS_DB = [
             });
         }
 
-        initTouchControls() {
-            const buttons = [
-                { id: 'btn-up', action: () => { this.player.vy -= this.player.accel * 4.5; } },
-                { id: 'btn-down', action: () => { this.player.vy += this.player.accel * 4.5; } },
-                { id: 'btn-left', action: () => { this.player.vx -= this.player.accel * 4.5; } },
-                { id: 'btn-right', action: () => { this.player.vx += this.player.accel * 4.5; } }
-            ];
-
-            buttons.forEach(btn => {
-                const el = document.getElementById(btn.id);
-                if (el) {
-                    el.addEventListener('touchstart', (e) => {
-                        e.preventDefault();
-                        btn.action();
-                    });
-                    el.addEventListener('mousedown', (e) => {
-                        e.preventDefault();
-                        btn.action();
-                    });
-                }
-            });
-        }
-
         resizeCanvas() {
             const container = this.canvas.parentElement;
             
-            // Limitador dinámico para que el canvas nunca desborde el alto en modo horizontal
+            // Limitador dinámico optimizado ahora que se eliminaron los controles móviles de pantalla
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth < 1024 && ('ontouchstart' in window || navigator.maxTouchPoints > 0));
-            const controlsOffset = (isMobile && window.innerWidth > window.innerHeight) ? 140 : 200;
+            // Espacio de compensación vertical reducido al mínimo (75px) para maximizar visualización del laberinto en Landscape móvil
+            const controlsOffset = (isMobile && window.innerWidth > window.innerHeight) ? 75 : 120;
             const maxAvailableHeight = Math.max(150, window.innerHeight - controlsOffset);
             const containerWidth = Math.max(200, container.clientWidth - 16); 
 
@@ -315,6 +289,7 @@ const QUESTIONS_DB = [
                         this.goal = { x: cx, y: cy, r: goalRadius };
                     } else if (type === 7) { 
                         let qIndex = 0;
+                        if (r === 3 && c === 1) qIndex = 0;
                         if (r === 5 && c === 7) qIndex = 1;
                         if (r === 5 && c === 14) qIndex = 2;
 
@@ -771,3 +746,36 @@ const QUESTIONS_DB = [
             }
         }
     }
+
+    // Funcionalidad de pantalla completa unificada para Desktop y Mobile
+    function toggleFullscreen() {
+        const btnText = document.getElementById('fullscreen-text');
+        const btnIcon = document.getElementById('fullscreen-icon');
+        
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().then(() => {
+                btnText.textContent = 'Salir Pantalla Completa';
+                btnIcon.textContent = '❌';
+            }).catch(err => {
+                console.error(`Error al intentar activar pantalla completa: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen().then(() => {
+                btnText.textContent = 'Pantalla Completa';
+                btnIcon.textContent = '📺';
+            });
+        }
+    }
+
+    // Escucha el cambio de estado nativo para asegurar la sincronía de los botones
+    document.addEventListener('fullscreenchange', () => {
+        const btnText = document.getElementById('fullscreen-text');
+        const btnIcon = document.getElementById('fullscreen-icon');
+        if (document.fullscreenElement) {
+            btnText.textContent = 'Salir Pantalla Completa';
+            btnIcon.textContent = '❌';
+        } else {
+            btnText.textContent = 'Pantalla Completa';
+            btnIcon.textContent = '📺';
+        }
+    });
