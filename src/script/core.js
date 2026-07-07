@@ -142,6 +142,7 @@ const QUESTIONS_DB = [
                 if (isPortrait) {
                     rotateOverlay.classList.remove('hidden');
                     this.isModalOpen = true; // Detener físicas e interacción
+                   
                 } else {
                     rotateOverlay.classList.add('hidden');
                     // Solo restaurar física si los modales UI generales están ocultos
@@ -150,9 +151,11 @@ const QUESTIONS_DB = [
                                               !document.getElementById('feedback-modal').classList.contains('hidden') || 
                                               !document.getElementById('end-modal').classList.contains('hidden');
                     this.isModalOpen = isAnyModalVisible;
+                    
                 }
                 this.detectDeviceMode(); // Recalcular controles en base a la nueva orientación
             } else {
+               
                 rotateOverlay.classList.add('hidden');
             }
         }

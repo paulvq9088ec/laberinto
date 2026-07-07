@@ -63,3 +63,86 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
 }
+
+/* Si la pantalla tiene un alto máximo de 500px, forzamos el comportamiento móvil */
+@media (max-height: 500px) {
+  #start-modal {
+    width: 95% !important;
+    max-width: 540px !important; /* Mantiene un tamaño cómodo en horizontal */
+    max-height: 92vh !important;
+    padding: 1rem !important; /* Reduce paddings para ahorrar espacio */
+    gap: 0.75rem !important;
+  }
+  
+  /* Opcional: Si notas que los textos o el título quedan muy grandes */
+  #start-modal h1 {
+    font-size: 1.25rem !important;
+  }
+
+  /* --- CONTROL DE ELEMENTOS INTERNOS EN MÓVIL HORIZONTAL --- */
+
+  /* 1. Reducir el contenedor del icono de trigo */
+  .modal-inner-element.w-12 {
+    width: 2.5rem !important; /* Equivale a w-10 */
+    height: 2.5rem !important; /* Equivale a h-10 */
+    font-size: 1.25rem !important; /* Ajusta el tamaño del emoji 🌾 */
+    border-radius: 0.75rem !important;
+  }
+
+  /* 2. Achicar los textos principales */
+  .modal-inner-element h1 {
+    font-size: 1.15rem !important; /* Título compacto */
+    line-height: 1.2 !important;
+  }
+  .modal-inner-element p {
+    font-size: 11px !important; /* Texto descriptivo más pequeño */
+    line-height: 1.3 !important;
+    margin-top: 0.25rem !important;
+  }
+
+  /* 3. Compactar la caja de consejos "Modo de juego" */
+  div.modal-inner-element.p-2 {
+    padding: 0.35rem 0.6rem !important; /* Menos espacio interno */
+    margin: 0 !important;
+  }
+  div.modal-inner-element.p-2 span, 
+  div.modal-inner-element.p-2 p {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* 4. Optimizar el botón para que no sea tan alto */
+  button.modal-inner-element {
+    padding-top: 0.5rem !important;   /* Equivale a un py-2 aproximado */
+    padding-bottom: 0.5rem !important;
+    font-size: 0.85rem !important;    /* Texto un poco más pequeño */
+    border-radius: 0.75rem !important;
+  }
+
+  /* --- CONTROL DEL CONTENEDOR DE JUEGO EN MÓVIL HORIZONTAL --- */
+
+  /* Limita el ancho del contenedor del juego para que el canvas mantenga su proporción de aspecto */
+  #game-container.game-inner-element {
+    /* Como el canvas es 2:1, si la pantalla es baja, limitamos el ancho 
+       para que la altura del juego no colapse el espacio vertical disponible */
+    max-width: 62dvw !important; 
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0.35rem !important; /* Reducimos el padding interno del contenedor */
+    gap: 0.25rem !important;
+  }
+
+  /* Forzar al canvas a respetar proporciones estrictas en pantallas de baja altura */
+  #game-container.game-inner-element #gameCanvas {
+    max-height: 66vh !important; /* Evita que el juego empuje los indicadores hacia afuera de la pantalla */
+    object-fit: contain !important; /* Asegura que el lienzo no sufra distorsiones de estiramiento */
+  }
+
+  /* Compactar el texto inferior del juego */
+  #device-hint.game-inner-element {
+    font-size: 9px !important;
+    margin-top: 0.15rem !important;
+    line-height: 1 !important;
+  }
+
+}
