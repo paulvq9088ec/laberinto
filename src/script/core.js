@@ -179,7 +179,7 @@ const QUESTIONS_DB = [
                 modeEl.textContent = 'Teclado (Desktop)';
                 descEl.innerHTML = 'Usa las <strong>Flechas del Teclado</strong> para mover la bola sobre el tablero de madera y calcula su inercia.';
                 hintEl.textContent = 'Usa las flechas de dirección de tu teclado para mover la esfera.';
-                mobileControls.classList.add('hidden');
+                // mobileControls.classList.add('hidden');
             }
         }
 
