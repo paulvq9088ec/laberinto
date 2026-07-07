@@ -1,44 +1,46 @@
+// rebuildGeometry()  this.player.radius modificar tamaño bola y huecos
+//constructor() modificar variables de bola
 const QUESTIONS_DB = [
-        {
-            "id": 1,
-            "procentajeAprobacion": 80,
-            "encabezado": "Caso Don Jorge - Finca en El Oro (20 ha, semi-intensivo). Solicita $40.000 para Alimento Balanceado, pagando en cuotas mensuales inmediatas desde el mes 1.",
-            "pregunta": "¿Deberías aceptar la propuesta de pago mensual inmediato que ofrece Don Jorge?",
-            "opciones": [
-                { "correcta": true, "text": "No, ajusto el plan de pagos porque durante el engorde (3-4 meses) él solo gasta en alimento y no tiene ingresos hasta la cosecha final." },
-                { "correcta": false, "text": "Sí, acepto porque el camarón es un negocio de flujo rápido y pagar mensualmente demuestra solvencia y reduce la exposición del banco." },
-                { "correcta": false, "text": "Depende, acepto solo si Don Jorge demuestra que tiene otras fuentes de ingresos externos para cubrir las cuotas de los primeros meses." }
-            ],
-            "feedbackPositivo": "¡Excelente criterio técnico! Tienes instinto acuícola. El ciclo del camarón dura entre 90 y 120 días. Durante este tiempo, el productor invierte masivamente en alimento y no recibe ingresos hasta que pesca y vende. Cobrarle antes es quitarle la liquidez necesaria.",
-            "feedbackNegativo": "¡Cuidado! Aunque la intención de pago sea buena, biológicamente es inviable. El camarón se cosecha y se vende todo al final del ciclo. Si paga cuotas antes, usará el capital de trabajo de su cultivo, perjudicando la alimentación del camarón."
-        },
-        {
-            "id": 2,
-            "procentajeAprobacion": 80,
-            "encabezado": "Caso Don Jorge - El dinero es para Alimento Balanceado (Capital de Trabajo).",
-            "pregunta": "Dado que el dinero es para Alimento Balanceado y el ciclo es corto, ¿qué plazo y gracia le ofreces?",
-            "opciones": [
-                { "correcta": true, "text": "Le ofrezco un crédito rotativo o plazo fijo a 120 días, con pago único de capital e interés al vencimiento (al momento de la cosecha)." },
-                { "correcta": false, "text": "Le ofrezco 12 meses de plazo con 6 meses de gracia, para que tenga holgura en caso de que decida hacer dos ciclos seguidos con el mismo dinero." },
-                { "correcta": false, "text": "Le ofrezco 36 meses plazo sin gracia, ya que al ser un monto alto ($40.000) es mejor diferir la deuda para que las cuotas sean muy bajas." }
-            ],
-            "feedbackPositivo": "¡Excelente decisión! El alimento balanceado es Capital de Trabajo puro para un ciclo específico. Lo ideal es financiar el ciclo exacto (aprox. 4 meses) y cobrar todo contra la cosecha.",
-            "feedbackNegativo": "Son plazos inadecuados. Financiar alimento a largo plazo (36 meses) o dar gracia excesiva (6 meses para un ciclo de 3) descalza el flujo. El alimento se consume y se convierte en dinero en 4 meses; el crédito debe reflejar esa realidad biológica."
-        },
-        {
-            "id": 3,
-            "procentajeAprobacion": 80,
-            "encabezado": "Caso Don Jorge - Solicita adicionalmente $10.000 extra para comprar aireadores.",
-            "pregunta": "Don Jorge te comenta que también quisiera $10.000 extra para comprar aireadores y “ver si mejoran la producción”. ¿Cómo procedes?",
-            "opciones": [
-                { "correcta": true, "text": "Separas la operación: el alimento a corto plazo y los aireadores como Activo Fijo a mediano plazo, pues es una inversión en tecnificación comercial." },
-                { "correcta": false, "text": "Le das los $10.000 como Capital de Trabajo junto con el alimento para facilitar el desembolso en una sola operación rápida." },
-                { "correcta": false, "text": "Le niegas el cupo extra porque primero debe demostrar que puede pagar el alimento antes de invertir en maquinaria nueva." }
-            ],
-            "feedbackPositivo": "¡Muy bien! Los aireadores son infraestructura (tecnificación) de mediano plazo. No se pagan con una sola cosecha, sino con el incremento de rentabilidad marginal a lo largo de varios ciclos. Deben tener su propio plazo de amortización.",
-            "feedbackNegativo": "Mezclar destinos es un error técnico común. Financiar activos fijos (aireadores) a corto plazo ahoga al cliente, y negarle la inversión de tajo le impide mejorar la productividad y densidad de siembra."
-        }
-    ];
+    {
+        "id": 1,
+        "procentajeAprobacion": 80,
+        "encabezado": "Curiosidades del Reino Animal - El mejor amigo del ser humano.",
+        "pregunta": "¿Cuál de estos datos sobre la biología de los perros es científicamente cierto?",
+        "opciones": [
+            { "correcta": true, "text": "Su sentido del olfato es entre 10.000 y 100.000 veces más potente que el nuestro, gracias a sus más de 300 millones de receptores." },
+            { "correcta": false, "text": "Ven el mundo completamente en blanco y negro, como si fuera una película o televisión antigua." },
+            { "correcta": false, "text": "Sudan a través de la lengua, razón por la cual jadean constantemente cuando hacen mucho ejercicio o hace calor." }
+        ],
+        "feedbackPositivo": "¡Excelente instinto animal! Los perros tienen una nariz prodigiosa. Lo del blanco y negro es un mito (ven en tonos azules y amarillos) y, en realidad, regulan su temperatura jadeando y sudan principalmente por las almohadillas de sus patas.",
+        "feedbackNegativo": "¡Ups, te dejaste llevar por un mito clásico! Los perros sí ven ciertos colores (tonos azules y amarillos) y sudan a través de las almohadillas de sus patas, no por la lengua. El jadeo es para regular la temperatura, pero no es sudor."
+    },
+    {
+        "id": 2,
+        "procentajeAprobacion": 80,
+        "encabezado": "Misterios del Mundo - Monumentos y maravillas históricas.",
+        "pregunta": "Si decidieras empacar tus maletas y visitar la Gran Muralla China, ¿qué dato curioso descubrirías al conocer su historia?",
+        "opciones": [
+            { "correcta": true, "text": "No es una sola muralla continua, sino una inmensa red de paredes, barreras naturales y fortificaciones construidas en distintas épocas." },
+            { "correcta": false, "text": "Es la única estructura construida por el ser humano que se puede ver claramente a simple vista desde la Luna." },
+            { "correcta": false, "text": "Fue construida en un tiempo récord de solo 50 años bajo las estrictas órdenes de un único emperador." }
+        ],
+        "feedbackPositivo": "¡Correcto! Tienes mucha cultura general. La Gran Muralla es en realidad un rompecabezas de fortificaciones discontinuas que se fueron uniendo a lo largo de más de 2000 años por diferentes dinastías.",
+        "feedbackNegativo": "¡Casi, pero no! El cuento de que se ve desde la Luna es probablemente el mito espacial más famoso, pero es falso. Además, su construcción tomó siglos y el trabajo de múltiples dinastías, no de un solo emperador."
+    },
+    {
+        "id": 3,
+        "procentajeAprobacion": 80,
+        "encabezado": "Eventos Globales - La historia oculta de los Juegos Olímpicos.",
+        "pregunta": "Durante los primeros Juegos Olímpicos modernos celebrados en Atenas en 1896, ¿cuál fue el premio exacto que recibieron los ganadores del primer lugar?",
+        "opciones": [
+            { "correcta": true, "text": "Una medalla de plata, una rama de olivo y un diploma oficial." },
+            { "correcta": false, "text": "Una medalla de oro macizo y una corona de laureles clásica." },
+            { "correcta": false, "text": "Una estatuilla de bronce de la diosa Atenea y una suma de dinero en efectivo." }
+        ],
+        "feedbackPositivo": "¡Exacto, eres un campeón del deporte! En 1896 la tradición del oro aún no existía. A los ganadores se les daba plata, y los que quedaban en segundo lugar recibían bronce. La medalla de oro se introdujo recién en 1904.",
+        "feedbackNegativo": "¡Te fuiste con la finta de la tradición actual! Sorprendentemente, las medallas de oro para los ganadores no existieron hasta los Juegos de San Luis en 1904. En los primeros juegos de Atenas, el gran campeón recibía plata."
+    }
+];
 
     // El camino es ancho y se introduce el numeral 7 (Checkpoint invisible detonador)
     // 0: Suelo libre
@@ -89,17 +91,19 @@ const QUESTIONS_DB = [
             
             this.disabledHoles = []; 
             
-            // Entidad Jugador
+            // Entidad Jugador (variables que controla la bola)
             this.player = {
                 x: 0,
                 y: 0,
                 radius: 8, 
                 vx: 0,
                 vy: 0,
-                accel: 0.22, 
-                friction: 0.96, 
-                maxSpeed: 4.5,
-                isFalling: false,
+                // --- VARIABLES DE FÍSICA QUE PUEDES MODIFICAR ---
+                accel: 0.22, //más alto más rápido al presionar tecla
+                friction: 0.99, //más alto tarda más en detenerse la bola
+                maxSpeed: 4.5, //velocidad máxima mayor más rápido
+                
+                isFalling: false, 
                 scale: 1
             };
 
@@ -261,8 +265,11 @@ const QUESTIONS_DB = [
             this.triggers = [];
             this.goal = null;
 
-            this.player.radius = Math.max(4, this.tileSize * 0.18);
-            const holeRadius = Math.max(4, this.tileSize * 0.15);
+            // Tamaño de la esfera (Jugador)
+            this.player.radius = Math.max(4, this.tileSize * 0.24);
+            // Tamaño de los agujeros
+            const holeRadius = Math.max(4, this.tileSize * 0.26);
+            // Tamaño del portal final (Meta)
             const goalRadius = Math.max(6, this.tileSize * 0.35);
 
             for (let r = 0; r < this.rows; r++) {
@@ -576,17 +583,17 @@ const QUESTIONS_DB = [
             const resetBtn = document.getElementById('end-reset-btn');
 
             if (percent >= 70) {
-                title.innerText = "¡Excelente instinto comercial!";
+                title.innerText = "¡Mente brillante!";
                 title.className = "text-xl md:text-3xl font-black text-green-600";
-                desc1.innerText = "Demuestras tener una gran intuición sobre la realidad del campo ecuatoriano y el manejo del financiamiento para acuicultura.";
-                desc2.innerHTML = "Aunque tu criterio es sólido, el siguiente contenido de la capacitación te brindará la precisión necesaria sobre los ciclos biológicos del camarón y las políticas exactas de nuestra oferta financiera. ¡Sigamos sembrando éxito!";
+                desc1.innerText = "Demuestras tener un excelente dominio de cultura general y una gran curiosidad por los misterios del mundo que nos rodea.";
+                desc2.innerHTML = "Has superado este laberinto de conocimiento con éxito. Ya puedes avanzar al siguiente contenido del curso para seguir aprendiendo. ¡Buen trabajo!";
                 resetBtn.classList.add('hidden'); 
                 markActivityAsCompleted();
             } else {
-                title.innerText = "¡Buen esfuerzo práctico!";
+                title.innerText = "¡Buen esfuerzo!";
                 title.className = "text-xl md:text-3xl font-black text-slate-800";
-                desc1.innerText = "Este diagnóstico inicial confirma que el sector acuícola tiene reglas financieras y biológicas sumamente distintas al comercio urbano tradicional.";
-                desc2.innerHTML = "Te invitamos a repetir el desafío comercial o avanzar para estudiar a fondo los tiempos de cosecha y así ofrecer la mejor consultoría a nuestros clientes del agro.";
+                desc1.innerText = "El mundo está lleno de datos sorprendentes y este reto demuestra que siempre hay algo nuevo y fascinante por descubrir.";
+                desc2.innerHTML = "Te invitamos a repetir el desafío para mejorar tu marca y memorizar estas curiosidades, o puedes avanzar directamente a la siguiente lección.";
                 resetBtn.classList.remove('hidden');
             }
         }
