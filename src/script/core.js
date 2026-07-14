@@ -68,7 +68,8 @@ const QUESTIONS_DB = [
     // --- CONFIGURACIÓN DE REINICIOS MANUALES (Coordenadas r = Fila, c = Columna) ---
     // Modifica estos números para cambiar dónde aparece la bola cuando se responde mal:
     const RESET_POSITIONS = {
-        0: { r: 1, c: 8 },   // Pregunta 1 (Trigger en r:3, c:6). Reaparece 2 casillas a la derecha (antes de cruzar).
+        0: { r: 1, c: 8 },   // Pregunta 1 (Trigger en r:3, c:6). Reaparece 2 casillas a la derecha (antes de cruzar). añadimos esto
+
         1: { r: 5, c: 3 },   // Pregunta 2 (Trigger en r:8, c:7). Reaparece 1 casilla abajo (antes de subir).
         2: { r: 5, c: 13 }   // Pregunta 3 (Trigger en r:3, c:13). Reaparece 2 casillas a la izquierda (antes de cruzar).
     };
