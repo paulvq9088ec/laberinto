@@ -783,7 +783,7 @@ const QUESTIONS_DB = [
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-slate-800">¡Tu progreso ha sido guardado!</h3>
-                        <p class="text-slate-500 text-xs mt-1">Ya puedes continuar con la siguiente lección teórica.</p>
+                        <p class="text-slate-500 text-sm mt-1">Ya puedes continuar con la siguiente lección teórica.</p>
                     </div>
                     <button id="end-reset-btn" onclick="restartGame()" class="w-full py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs md:text-sm font-bold rounded-xl transition-all cursor-pointer text-center mt-2">
                         🔄 Volver a jugar el desafío
