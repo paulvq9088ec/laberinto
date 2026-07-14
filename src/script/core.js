@@ -55,12 +55,12 @@ const QUESTIONS_DB = [
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [1,3,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,4,1,1],
         [1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1],
-        [1,7,2,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,1], 
+        [1,0,0,0,0,0,7,0,0,0,2,1,7,0,0,6,1,1,1,1], 
         [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1],
-        [1,0,1,0,0,0,5,7,1,0,0,0,0,6,7,0,1,1,1,1], 
+        [1,0,1,0,0,0,0,5,1,0,0,0,0,0,0,0,1,1,1,1], 
         [1,0,1,0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1],
         [1,0,1,0,1,1,1,0,1,0,0,0,0,0,1,1,1,1,1,1],
-        [1,0,1,0,1,1,1,0,1,1,1,1,0,0,1,1,1,1,1,1],
+        [1,0,1,0,1,1,1,7,1,1,1,1,0,0,1,1,1,1,1,1],
         [1,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ];
@@ -299,9 +299,9 @@ const QUESTIONS_DB = [
                         this.goal = { x: cx, y: cy, r: goalRadius };
                     } else if (type === 7) { 
                         let qIndex = 0;
-                        if (r === 3 && c === 1) qIndex = 0;
-                        if (r === 5 && c === 7) qIndex = 1;
-                        if (r === 5 && c === 14) qIndex = 2;
+                         if (r === 3 && c === 6) qIndex = 0;   // Primer detonador (Pregunta 1)
+                        if (r === 8 && c === 7) qIndex = 1;   // Segundo detonador (Pregunta 2)
+                        if (r === 3 && c === 12) qIndex = 2;  // Tercer detonador (Pregunta 3)
 
                         const isSuperado = this.disabledHoles.includes(qIndex);
                         this.triggers.push({
@@ -652,6 +652,32 @@ const QUESTIONS_DB = [
                 this.ctx.strokeStyle = '#cbd5e1';
                 this.ctx.lineWidth = 2;
                 this.ctx.stroke();
+            });
+
+             // --- NUEVO: DIBUJAR LOS CHECKPOINTS (7) COMO CRUCES VERDES ---
+            this.triggers.forEach(t => {
+                if (t.disabled) return; // Si el desafío ya se completó, no pintamos la cruz
+
+                this.ctx.save();
+                this.ctx.strokeStyle = '#22c55e'; // Verde brillante (green-500)
+                this.ctx.lineWidth = 5.5;
+                this.ctx.lineCap = '';
+
+                const size = this.tileSize * 0.22; // Tamaño de los brazos de la cruz
+
+                // Línea horizontal de la cruz
+                this.ctx.beginPath();
+                this.ctx.moveTo(t.x - size, t.y);
+                this.ctx.lineTo(t.x + size, t.y);
+                this.ctx.stroke();
+
+                // Línea vertical de la cruz
+                this.ctx.beginPath();
+                this.ctx.moveTo(t.x, t.y - size);
+                this.ctx.lineTo(t.x, t.y + size);
+                this.ctx.stroke();
+
+                this.ctx.restore();
             });
 
             if (this.goal) {
