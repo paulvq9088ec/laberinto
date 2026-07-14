@@ -65,6 +65,14 @@ const QUESTIONS_DB = [
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ];
 
+    // --- CONFIGURACIÓN DE REINICIOS MANUALES (Coordenadas r = Fila, c = Columna) ---
+    // Modifica estos números para cambiar dónde aparece la bola cuando se responde mal:
+    const RESET_POSITIONS = {
+        0: { r: 1, c: 8 },   // Pregunta 1 (Trigger en r:3, c:6). Reaparece 2 casillas a la derecha (antes de cruzar).
+        1: { r: 5, c: 3 },   // Pregunta 2 (Trigger en r:8, c:7). Reaparece 1 casilla abajo (antes de subir).
+        2: { r: 5, c: 13 }   // Pregunta 3 (Trigger en r:3, c:13). Reaparece 2 casillas a la izquierda (antes de cruzar).
+    };
+
     class GameEngine {
         constructor() {
             this.canvas = document.getElementById('gameCanvas');
@@ -485,6 +493,7 @@ const QUESTIONS_DB = [
             this.player.isFalling = false;
             
             const q = QUESTIONS_DB[this.lastActiveHoleIndex];
+            
             if (!q) return;
 
             document.getElementById('question-id-badge').innerText = `RETO ${q.id} de ${this.totalQuestions}`;
@@ -552,8 +561,19 @@ const QUESTIONS_DB = [
                 fbBtn.className = "w-full py-2.5 md:py-3 bg-slate-800 text-white font-semibold rounded-2xl hover:bg-slate-900 transition-all cursor-pointer";
                 fbBtn.innerText = "Intentar de Nuevo";
 
-                this.player.x = this.lastSafeX;
-                this.player.y = this.lastSafeY;
+                // Buscamos si existe una coordenada manual definida para esta pregunta
+                const resetCoord = RESET_POSITIONS[this.lastActiveHoleIndex];
+
+                if (resetCoord) {
+                    // Convertimos la fila (r) y columna (c) manual a coordenadas de píxeles en el lienzo
+                    this.player.x = resetCoord.c * this.tileSize + this.tileSize / 2;
+                    this.player.y = resetCoord.r * this.tileSize + this.tileSize / 2;
+                } else {
+                    // Si por alguna razón no se definió, usamos la última posición segura como respaldo
+                    this.player.x = this.lastSafeX;
+                    this.player.y = this.lastSafeY;
+                }
+
                 this.player.vx = 0;
                 this.player.vy = 0;
                 this.player.scale = 1;
